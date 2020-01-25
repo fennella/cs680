@@ -1,6 +1,6 @@
 # Assignment 1
 
-I decided to do this assignment using Python. Private members are represented with a "_" preceding the variable/function name. Variables/functions are assumed to be public if there is no "_" preceding their name
+I decided to do this assignment using Python. Private members are represented with a _ preceding the variable/function name. Variables/functions are assumed to be public if there is no _ preceding their name
 
 ## Install Requirements
 
