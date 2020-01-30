@@ -2,11 +2,12 @@ from openpyxl import load_workbook
 import names
 import random
 
+## Program used to generate student Excel sheet
+
 STUDENT_STATUSES = ["Undergrad", "Grad", "Both"]
 
 def createHeaders(sheet):
 
-    
     headers = ["StudentID", "FirstName", "LastName", "Email", "Status", "College", "Major", "Citizenship", "GPA", "FamilyIncome"]
     for i,header in enumerate(headers):
         sheet.cell(row=1, column=i + 1).value = header
@@ -15,8 +16,6 @@ def loadCollegeData():
 
     collegeWB = load_workbook('collegeMajors.xlsx')
     return collegeWB['College']
-
-
 
 def createStudentFile(wb):
 
@@ -46,15 +45,12 @@ def createStudentFile(wb):
         for i,value in enumerate(data):
             sheet.cell(row=row, column=i + 1).value = value
 
-
     wb.save('dataFile.xlsx')
-
 
 def main():
 
     wb = load_workbook('dataFile.xlsx')
     createStudentFile(wb)
-
 
 main()
 

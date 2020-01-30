@@ -3,6 +3,8 @@ from .dataFiles import DataFiles
 
 class Scholarship():
     
+    # If class is initialized with scholarship ID, automatically know attributes of object
+    # If class is not initialized with scholarship ID, ask user for scholarship ID to get attributes
     def __init__(self, scholarshipID=None):
 
         self._dataFiles = DataFiles()
@@ -11,7 +13,6 @@ class Scholarship():
             self.scholarshipID = self._getScholarshipID()
         else:
             self.scholarshipID = scholarshipID
-
 
         attributes = self._getAttributes()
         self.name = attributes[1].value
@@ -25,6 +26,7 @@ class Scholarship():
         self.amountAvailable = int(attributes[9].value)
         self.maxFamilyIncome = int(attributes[10].value)
 
+    # Look in scholarship Excel sheet for scholarship ID supplied
     def _getAttributes(self):
         
         for i,row in enumerate(self._dataFiles.scholarshipSheet.iter_rows()):
@@ -32,6 +34,7 @@ class Scholarship():
             if int(row[0].value) == self.scholarshipID:
                 return row
 
+    # No scholarship ID supplied, ask user for scholarship ID
     def _getScholarshipID(self):
 
         validScholarshipID = False
@@ -42,6 +45,7 @@ class Scholarship():
             else:
                 return int(selection)
     
+    # Validate scholarship ID is valid
     def _isValidScholarshipSelection(self, selection):
 
         if not selection.isdigit() or int(selection) < 1 or int(selection) > self._dataFiles.scholarshipSheet.max_row - 1:

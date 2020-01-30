@@ -7,6 +7,11 @@ from datetime import date
 
 class Application():
 
+    # If class is initialized with no application ID,
+    # Ask for the scholarship ID and the student ID to create an application ID
+    # If the class is initialize with application ID, scholarship and student objects are
+    # initialized using this information
+
     def __init__(self, adminID, applicationID=None):
 
         self._dataFiles = DataFiles()
@@ -18,7 +23,7 @@ class Application():
         else:
             self.scholarship, self.student = self._getAppInfo(applicationID)
             
-        
+    # Check if the user qualifies for a scholarship and then approve/decline application request  
     def create(self):
 
         if not self._studentQualifies():
@@ -39,6 +44,8 @@ class Application():
 
         print("\nSuccessfully added application\n")
 
+    # When app ID is supplied by the user, this function initializes the corresponding
+    # Scholarship and Student associated with that application
     def _getAppInfo(self, appID):
 
         for i,row in enumerate(self._dataFiles.applicationSheet.iter_rows()):
@@ -46,6 +53,7 @@ class Application():
             if int(row[0].value) == int(appID):
                 return [Scholarship(int(row[2].value)), Student(row[1].value)]
     
+    # Determine if a student qualifies for a scholarship
     def _studentQualifies(self):
 
         if self.scholarship.amountAvailable < 1: return False
@@ -55,6 +63,7 @@ class Application():
         
         else: return self._validateFinancialApp(self.student, self.scholarship)
     
+    # Helper function to verify if a student qualifies for an academic scholarship
     def _validateAcademicApp(self, student, scholarship):
 
         if scholarship.studentType != "All":
@@ -66,6 +75,7 @@ class Application():
         
         return True
 
+    # Helper function to verify if a student qualifies for a financial scholarship
     def _validateFinancialApp(self, student, scholarship):
 
         if scholarship.studentType != "All":
@@ -77,6 +87,7 @@ class Application():
         
         return True
 
+    # Helper function to generate a primary key for the application sheet
     def _genApplicationPK(self):
 
         maxValue = 1

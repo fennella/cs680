@@ -17,6 +17,7 @@ class Client():
             9:"Remove a Student Scholarship"
         }
     
+    # Get users action selection and validate input
     def getSelection(self):
 
         while True:
@@ -35,6 +36,7 @@ class Client():
             else:
                 return int(selection)
 
+    # Perform an action based on the input the user selected
     def performAdminAction(self, admin, selection):
 
         if selection == 1: admin.accessScholarshipInfo()

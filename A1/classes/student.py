@@ -3,6 +3,8 @@ from .dataFiles import DataFiles
 
 class Student():
 
+    # If class is initialized with student ID, attributes are known
+    # If class is not initialized with student ID, ask user for student ID to get attributes
     def __init__(self, studentID=None):
 
         self._dataFiles = DataFiles()
@@ -23,6 +25,7 @@ class Student():
         self.gpa = attributes[8].value
         self.familyIncome = attributes[9].value
 
+    # Return attributes of student when student ID is known
     def _getStudentAttributes(self):
 
         for row in self._dataFiles.studentSheet.iter_rows():
@@ -30,6 +33,7 @@ class Student():
                 return row
         return False
 
+    # Ask user for student ID to initialize student object
     def _getStudentID(self):
 
         while True:
@@ -38,6 +42,7 @@ class Student():
                 print("Invalid student ID. Please enter a valid student ID. Please try again.\n")
             else: return studentID
     
+    # Check if student ID is in students Excel sheet
     def _validateStudentID(self, studentID):
 
         if len(studentID) < 1 or len(studentID) > 7: return False

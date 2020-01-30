@@ -10,6 +10,7 @@ def main():
     client = Client()
     admin = Admin()
 
+    ## Main loop that asks user for action selection
     while True:
 
         selection = client.getSelection()

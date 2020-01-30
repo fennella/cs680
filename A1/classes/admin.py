@@ -11,7 +11,7 @@ class Admin():
         self._dataFiles = DataFiles()
         self._adminID = self._getAdminID()
 
-        
+    ## Print out information about all scholarships
     def accessScholarshipInfo(self):
 
         headers = self._dataFiles.scholarshipSheet[1]
@@ -23,6 +23,7 @@ class Admin():
                 print(f'{headers[j].value}: {row[j].value}')
             print("\n")
 
+    ## Print out information about scholarships with availability
     def viewAvailableScholarships(self):
 
         foundAvailable = False
@@ -35,6 +36,7 @@ class Admin():
         if not foundAvailable:
             print("There are no available scholarships to be awared to students")
 
+    # View students eligible for any given scholarship
     def viewEligibleStudents(self):
 
         self.accessScholarshipInfo()
@@ -57,6 +59,7 @@ class Admin():
 
         print("")
 
+    # View scholarship application that have not been approved or declined
     def viewPendingApps(self):
         
         self._dataFiles = DataFiles()
@@ -76,11 +79,13 @@ class Admin():
 
         print("")
 
+    # Create an application from the Application class
     def createApplication(self):
 
         application = Application(self._adminID)
         application.create()
 
+    # Decline a given application for a scholarship and update Excel doc
     def declineApplication(self):
 
     
@@ -93,17 +98,20 @@ class Admin():
 
         print("\nScholarship Successfully Declined\n")
 
+    # Award a scholarship to a student using the Award class
     def awardScholarship(self):
 
         award = Award(self._adminID)
         award.awardScholarship()
 
+    # Remove a scholarship from a student using the Award class
     def removeScholarship(self):
 
         appID = self._validateAwardID()
         award = Award(self._adminID, appID)
         award.removeScholarship()
 
+    # View scholarship awards that are currently active
     def viewActiveScholarships(self):
 
         self._dataFiles = DataFiles()
@@ -114,8 +122,6 @@ class Admin():
             print("\nThere are no active scholarships\n")
             return
 
-        
-        
         print("")
         for award in activeScholarships:
             printStr = ""
@@ -123,6 +129,7 @@ class Admin():
                 printStr += f'{attr}: {award[attr]}, '
             print(printStr[:-2])
 
+    # Helper function to find students eligible for a given academic scholarship
     def _academicFilter(self, scholarship):
 
         validStudents = []
@@ -144,7 +151,8 @@ class Admin():
             validStudents.append(student)
 
         return sorted(validStudents, key=lambda k: k['GPA'], reverse=True)
-                
+
+    # Helper function to find students eligible for a given financial scholarship     
     def _financialFilter(self, scholarship):
         
         validStudents = []
@@ -166,7 +174,8 @@ class Admin():
             validStudents.append(student)
 
         return sorted(validStudents, key=lambda k: k['GPA'], reverse=True)
-        
+
+    # Helper function to validate users admin ID   
     def _getAdminID(self):
 
         while True:
@@ -177,6 +186,7 @@ class Admin():
             else:
                 return adminID        
 
+    # Helper function that returns all applications that are currently pending approval/decline
     def _getPendingApps(self):
 
         pendingApps = []
@@ -194,6 +204,7 @@ class Admin():
         
         return pendingApps
 
+    # Helper function check if a user supplied application ID is valid
     def _validateAppID(self):
 
         while True:
@@ -205,6 +216,7 @@ class Admin():
                         return i + 1
             print("No applications with that application ID are pending approval/denial. Please try again\n")
 
+    # Helper function to retrieve all scholarships currently awarded to a given student
     def _getActiveScholarships(self):
 
         activeScholarships = []
@@ -223,6 +235,7 @@ class Admin():
 
         return activeScholarships
 
+    # Helper function to validate if the award ID the user inputted is valid
     def _validateAwardID(self):
 
         while True:
