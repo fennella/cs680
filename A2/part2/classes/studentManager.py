@@ -1,8 +1,7 @@
-from openpyxl import load_workbook
 from .student import Student
+from openpyxl import load_workbook
 
-
-class Manager():
+class StudentManager():
 
     def __init__(self):
         
@@ -15,9 +14,9 @@ class Manager():
         self._loadStudentsFromFile()
 
         for aStudent in self._studentList:
-            aStudent.displayStudent()
+            print(aStudent.toString())
 
-    # Get student input from user and write to Excel sheet
+    # Get student input from user then write to Excel sheet
     def addStudent(self):
 
         first = input("\nEnter Student First Name: ")
@@ -82,5 +81,3 @@ class Manager():
     def _validNames(self, first, last):
 
         return len(first) > 0 and len(last) > 0 and first.isalpha() and last.isalpha()
-
-    

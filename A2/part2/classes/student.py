@@ -28,11 +28,7 @@ class Student():
 
     def toString(self):
         
-        return self._studentID
-
-    def displayStudent(self):
-
-        print(f'Student ID: {self._studentID}, Name: {self._first} {self._last}, Email: {self._email}')    
+        return f'{self._first} {self._last} ({self._studentID})'   
 
     def _genStudentID(self):
 
