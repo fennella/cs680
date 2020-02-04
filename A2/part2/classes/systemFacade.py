@@ -1,7 +1,7 @@
 from .studentManager import StudentManager
 from .scholarshipManager import ScholarshipManager
 
-# Facade to access manager class
+# Facade to access manager classes
 class SystemFacade():
 
     def __init__(self):
