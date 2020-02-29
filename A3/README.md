@@ -1,6 +1,6 @@
 # Assignment 3
 
-This assignment refactors the program from Assignment 2 according to the Single Responsibility Principle
+This assignment refactors the program from Assignment 2 according to the Single Responsibility Principle. The UML Model for this program can be found in the UML.mdj file
 
 ## Install Requirements
 

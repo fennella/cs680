@@ -1,4 +1,3 @@
-from openpyxl import load_workbook
 from .student import Student
 from .dataFile import DataFile
 

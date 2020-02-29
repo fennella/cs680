@@ -1,4 +1,3 @@
-from openpyxl import load_workbook
 from .scholarship import Scholarship
 from .dataFile import DataFile
 
