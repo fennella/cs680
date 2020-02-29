@@ -1,17 +1,18 @@
 from openpyxl import load_workbook
 from .scholarship import Scholarship
+from .dataFile import DataFile
 
 class ScholarshipDisplayer():
 
     def __init__(self):
 
-        self._dataFile = load_workbook('dataFiles/dataFile.xlsx')
+        self._dataFile = DataFile()
         self._scholarshipList = []
     
     # Display all scholarships to user
     def display(self):
 
-        self._refreshWorkbook()
+        self._dataFile.refreshWorkbook()
         self._loadScholarships()
 
         for aScholarship in self._scholarshipList:
@@ -22,7 +23,7 @@ class ScholarshipDisplayer():
 
         self._scholarshipList = []
 
-        for i,row in enumerate(self._dataFile['Scholarships'].iter_rows()):
+        for i,row in enumerate(self._dataFile.file['Scholarships'].iter_rows()):
 
             if i == 0: continue
         
@@ -35,7 +36,3 @@ class ScholarshipDisplayer():
         scholarship = Scholarship()
         scholarship.getScholarship(row)
         return scholarship
-
-    def _refreshWorkbook(self):
-
-        self._dataFile = load_workbook('dataFiles/dataFile.xlsx')

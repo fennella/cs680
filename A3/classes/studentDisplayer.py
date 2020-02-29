@@ -1,17 +1,18 @@
 from openpyxl import load_workbook
 from .student import Student
+from .dataFile import DataFile
 
 class StudentDisplayer():
 
     def __init__(self):
 
-        self._dataFile = load_workbook('dataFiles/dataFile.xlsx')
+        self._dataFile = DataFile()
         self._studentList = []
 
     # Present all students in the system to the user
     def display(self):
 
-        self._refreshWorkbook()
+        self._dataFile.refreshWorkbook()
         self._loadStudents()
 
         for aStudent in self._studentList:
@@ -22,7 +23,7 @@ class StudentDisplayer():
 
         self._studentList = []
         
-        for i,row in enumerate(self._dataFile['Students'].iter_rows()):
+        for i,row in enumerate(self._dataFile.file['Students'].iter_rows()):
 
             if i == 0: continue
 
@@ -34,8 +35,4 @@ class StudentDisplayer():
 
         student = Student()
         student.getStudent(row)
-        return student 
-    
-    def _refreshWorkbook(self):
-
-        self._dataFile = load_workbook('dataFiles/dataFile.xlsx')
+        return student
