@@ -1,0 +1,3 @@
+I choose to use the Active Record pattern because there are only two main operations that interact with the database (display, add).
+These operations are also very simple and do not require intesive logic or compute. 
+I was also able to keep my program from A3 designed the same and actually decrease the amount of code needed
